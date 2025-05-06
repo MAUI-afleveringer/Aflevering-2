@@ -33,7 +33,7 @@ export default function Login() {
 
             if (response.ok) {
                 const token = await response.text();
-                localStorage.setItem("token", token.jwt);
+                localStorage.setItem("token", token);
                 alert("Login successful!")
                 navigate("/jobs");
 
