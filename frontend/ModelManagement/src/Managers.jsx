@@ -27,6 +27,10 @@ export default function Managers() {
 
     }, []); // Run the effect (fetch in this case) only once when the component renders
 
+    function addManager(newManager) {
+        setData(prevData => [...prevData, newManager])
+    }
+
     return (
         <main>
             <button onClick={() => setShowModal(true)}>Create new manager</button>
@@ -34,7 +38,7 @@ export default function Managers() {
             {
                 data ?
                     data.map(manager => (
-                        <section className="manager">
+                        <section className="manager" key={manager.managerId}>
                             <p className="managerId">{manager.managerId}</p>
                             <p className="managerName">{manager.firstName} {manager.lastName}</p>
                             <p className="managerEmail">{manager.email}</p>
@@ -44,7 +48,7 @@ export default function Managers() {
             }
 
             {showModal && createPortal(
-                <ManagerModal onClose={() => setShowModal(false)} />, document.body
+                <ManagerModal onClose={() => setShowModal(false)} addManager={addManager} />, document.body
             )}
         </main>
     )
