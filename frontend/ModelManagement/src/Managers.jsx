@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import ManagerModal from './CreateManagerModal';
+import { jwtDecode } from 'jwt-decode';
 
 export default function Managers() {
     const [data, setData] = useState([])
     const [showModal, setShowModal] = useState(false);
+    const token = localStorage.getItem('token');
+    if (token) {
+        const decoded = jwtDecode(token);
+        console.log(decoded);
+        console.log(decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Manager");
+    }
 
     useEffect(() => {
         const token = localStorage.getItem('token');
