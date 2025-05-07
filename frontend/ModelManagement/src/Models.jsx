@@ -33,7 +33,7 @@ export default function Models() {
     };
 
     const createModel = async () => {
-        
+        const url = "http://localhost:8080/api/models"
     };
     
     /*var url = "https://yourUrl";

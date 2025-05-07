@@ -49,6 +49,14 @@ export default function Login() {
         }
     }
 
+    const handleLogout = () => {
+        setError("");
+        localStorage.removeItem("token");
+        alert("Logout successful");
+        navigate("/")
+
+    }
+
 
 
     return (
@@ -59,7 +67,7 @@ export default function Login() {
                 <input type="submit" value="Login" />
                 {error && <p className="error">{error}</p>}
             </form>
-
+            <button onClick={handleLogout}>Log Out</button>
         </section>
     )
 } 
