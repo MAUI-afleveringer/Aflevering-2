@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import ManagerModal from './CreateManagerModal';
 
 export default function Managers() {
     const [data, setData] = useState([])
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -26,6 +29,7 @@ export default function Managers() {
 
     return (
         <main>
+            <button onClick={() => setShowModal(true)}>Create new manager</button>
             <h1>Managers</h1>
             {
                 data ?
@@ -38,6 +42,10 @@ export default function Managers() {
                     ))
                     : <p>Loading...</p>
             }
+
+            {showModal && createPortal(
+                <ManagerModal onClose={() => setShowModal(false)} />, document.body
+            )}
         </main>
     )
 }
