@@ -32,6 +32,24 @@ export default function Models() {
         }
     };
 
+    const createModel = async () => {
+        
+    };
+    
+    /*var url = "https://yourUrl";
+fetch(url, {
+method: 'POST', // Or PUT
+body: JSON.stringify(this.form), // assumes your data is in a // form object on your instance.
+credentials: 'include',
+headers: {
+'Authorization': 'Bearer ' + localStorage.getItem("token"),
+'Content-Type': 'application/json'
+}
+}).then(responseJson => {
+this.response = responseJson;
+})
+.catch(error => alert('Something bad happened: ' + error)); */
+
     return (
         <section>
             <h2>Models-page</h2>
