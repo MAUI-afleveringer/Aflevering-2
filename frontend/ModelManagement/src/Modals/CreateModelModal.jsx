@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
-import modelForm from "./modelForm.json"
 
 export default function ModelModal({ onClose, addModel }) {
 
-    const [firstName, setFirstName] = useState(""); // Requried
-    const [lastName, setLastName] = useState(""); // Requried
-    const [email, setEmail] = useState(""); // Requried
-    const [phoneNo, setPhoneNo] = useState(""); // Requried
+    const [firstName, setFirstName] = useState(""); 
+    const [lastName, setLastName] = useState(""); 
+    const [email, setEmail] = useState(""); 
+    const [phoneNo, setPhoneNo] = useState(""); 
     const [addressLine1, setAddressLine1] = useState("");
     const [addressLine2, setAddressLine2] = useState("");
     const [zip, setZip] = useState("");
@@ -19,7 +18,7 @@ export default function ModelModal({ onClose, addModel }) {
     const [hairColor, setHairColor] = useState("");
     const [eyeColor, setEyeColor] = useState("");
     const [comments, setComments] = useState("");
-    const [password, setPassword] = useState(""); // Requried
+    const [password, setPassword] = useState(""); 
     const [error, setError] = useState("");
     const token = localStorage.getItem("token");
 
@@ -58,7 +57,7 @@ export default function ModelModal({ onClose, addModel }) {
         }
 
         try {
-            console.log(JSON.stringify(newModel, null, 2));
+            //console.log(JSON.stringify(newModel, null, 2)); For printing what we are sending. 
             const response = await fetch(url, {
                 method: 'POST',
                 headers: new Headers({
@@ -91,10 +90,10 @@ export default function ModelModal({ onClose, addModel }) {
             <section className="createModal">
                 <h3>Create Model</h3>
                 <form action="" className="createForm">
-                    <input type="text" name="" id="" className="formInput" placeholder="REQURIED: Firstname" onChange={(e) => setFirstName(e.target.value)} />
-                    <input type="text" name="" id="" className="formInput" placeholder="REQURIED: Lastname" onChange={(e) => setLastName(e.target.value)} />
-                    <input type="text" name="" id="" className="formInput" placeholder="REQURIED: Email" onChange={(e) => setEmail(e.target.value)} />
-                    <input type="text" name="" id="" className="formInput" placeholder="REQURIED: Phone Number" onChange={(e) => setPhoneNo(e.target.value)} />
+                    <input type="text" name="" id="" className="formInput" placeholder="Firstname" onChange={(e) => setFirstName(e.target.value)} />
+                    <input type="text" name="" id="" className="formInput" placeholder="Lastname" onChange={(e) => setLastName(e.target.value)} />
+                    <input type="text" name="" id="" className="formInput" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                    <input type="text" name="" id="" className="formInput" placeholder="Phone Number" onChange={(e) => setPhoneNo(e.target.value)} />
                     <input type="text" name="" id="" className="formInput" placeholder="Address Line 1" onChange={(e) => setAddressLine1(e.target.value)} />
                     <input type="text" name="" id="" className="formInput" placeholder="Address Line 2" onChange={(e) => setAddressLine2(e.target.value)} />
                     <input type="text" name="" id="" className="formInput" placeholder="Zip" onChange={(e) => setZip(e.target.value)} />
@@ -107,7 +106,7 @@ export default function ModelModal({ onClose, addModel }) {
                     <input type="text" name="" id="" className="formInput" placeholder="Hair Color" onChange={(e) => setHairColor(e.target.value)} />
                     <input type="text" name="" id="" className="formInput" placeholder="Eye Color" onChange={(e) => setEyeColor(e.target.value)} />
                     <input type="text" name="" id="" className="formInput" placeholder="Comments" onChange={(e) => setComments(e.target.value)} />
-                    <input type="password" name="" id="" className="formInput" placeholder="REQURIED: Password" onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" name="" id="" className="formInput" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                     <div className="createBtns">
                         <input type="button" value="Create Model" onClick={handleSubmit} />
                         <input type="button" value="Close" onClick={onClose} />

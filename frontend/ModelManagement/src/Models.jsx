@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { jwtDecode } from 'jwt-decode';
-import ModelModal from "./CreateModelModal";
+import ModelModal from "./Modals/CreateModelModal";
 import { createPortal } from 'react-dom';
 
 export default function Models() {
