@@ -52,11 +52,16 @@ export default function JobModal({ onClose, addJob }) {
                 <form action="" className="createForm">
                     <input type="text" className="formInput" placeholder="Customername" value={customerName} onChange={(e) => setCustomerName(e.target.value)} />
                     <input type="date" className="formInput" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                    <input type="text" className="formInput" placeholder="Customername" value={customerName} onChange={(e) => setCustomerName(e.target.value)} />
+                    <input type="number" className="formInput" placeholder="Days" value={days} onChange={(e) => setDays(Number)(e.target.value)} />
+                    <input type="text" className="formInput" placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} />
+                    <input type="text" className="formInput" placeholder="Comments" value={comments} onChange={(e) => setComments(e.target.value)} />
+                    <div className="createBtns">
+                        <input type="button" value="Add job" onClick={handleSubmit} />
+                        <input type="button" value="Close" onClick={onClose} />
+                    </div>
                 </form>
+                <p>{error}</p>
             </section>
         </>
     )
-
-    //<input type="date"></input>
 }

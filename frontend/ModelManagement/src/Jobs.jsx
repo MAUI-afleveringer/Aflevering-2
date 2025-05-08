@@ -4,6 +4,8 @@ import React from "react";
 import { createPortal } from "react-dom";
 import AddModelToJobModal from "./Modals/AddModelToJobModal";
 
+import JobModal from "./Modals/CreateJobModal";
+
 export default function Jobs() {
     const [data, setData] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
@@ -31,7 +33,8 @@ export default function Jobs() {
 
     }
 
-    function createNewJob(newJob) {
+    // Function to add job 
+    function addJob(newJob) {
         setData(prevData => [prevData, newJob])
     }
 
@@ -49,9 +52,11 @@ export default function Jobs() {
 
     }, [])
 
+    //button added for job and createPortal added
     return (
         <main>
-
+            
+            <button onClick={() => setShowCreateModal(true)}>Create new Job listing</button>
             <h1>Jobs</h1>
             {
                 data ?
@@ -81,6 +86,11 @@ export default function Jobs() {
                     ))
                     :
                     <p>Loading...</p>
+            }
+            {
+                showAddModal && createPortal(
+                    <JobModal onClose={() => setShowAddModal(false)} addJob={addJob}/>, document.body
+                )
             }
 
             {
