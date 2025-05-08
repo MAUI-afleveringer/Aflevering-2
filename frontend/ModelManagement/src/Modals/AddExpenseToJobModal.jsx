@@ -2,7 +2,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react'
 const token = localStorage.getItem("token");
 
-export default function ExpenseModal({ onClose, addModel }) {
+export default function ExpenseModal({ onClose, addExpense }) {
     const decoded = jwtDecode(token);
     const modelId = decoded["ModelId"];
 
@@ -25,17 +25,14 @@ export default function ExpenseModal({ onClose, addModel }) {
                 return;
             }
         }
-        const newModel = {
-            jobId,
-            date: dateIso,
-            text,
-            amount
-
-        };
 
         try {
-            console.log(modelId)
-            console.log(JSON.stringify(newModel, null, 2));
+            // console.log(modelId)
+            // console.log(JSON.stringify(newModel, null, 2));
+            if (amount <= 0){
+                setError("Amount must be bigger than 0");
+                return;
+            }
             const response = await fetch(url, {
                 method: 'POST',
                 headers: new Headers({
@@ -48,7 +45,7 @@ export default function ExpenseModal({ onClose, addModel }) {
             if (response.ok) {
                 const createExpense = await response.json();
                 alert("New expense added!");
-                addModel(createExpense);
+                addExpense(createExpense);
                 console.log(createExpense)
                 onClose();
             }
@@ -66,7 +63,7 @@ export default function ExpenseModal({ onClose, addModel }) {
         <>
             <div className="dark"></div>
             <section className="createModal">
-                <h3>Create Model</h3>
+                <h3>Add expense to job</h3>
                 <form action="" className="createForm">
                     <input type="text" name="" id="" className="formInput" placeholder="Job ID" onChange={(e) => setJobId(e.target.value)} />
                     <input type="date" name="" id="" className="formInput" placeholder="Date" onChange={(e) => setDate(e.target.value)} />
