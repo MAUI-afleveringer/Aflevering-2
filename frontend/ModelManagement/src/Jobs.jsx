@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { createPortal } from "react-dom";
 import AddModelToJobModal from "./Modals/AddModelToJobModal";
+import DeleteModelFromJobModal from "./Modals/DeleteModelFromJob";
 
 import JobModal from "./Modals/CreateJobModal";
 
 export default function Jobs() {
     const [data, setData] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
+    const [showCreateModal, setShowCreateModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedJob, setSelectedJob] = useState(null);
 
     const token = localStorage.getItem("token");
@@ -38,9 +41,13 @@ export default function Jobs() {
         setData(prevData => [prevData, newJob])
     }
 
-    function addModel(model) {
-        setSelectedJob(prevSelectedJob.models => [...selectedJob.models, model])
+    function deleteModelFromJob(deleteModelFromJob) {
+        setData(prevData => [prevData, deleteModelFromJob])
     }
+
+    /*function addModel(model) {
+        setSelectedJob(prevSelectedJob.models => [...selectedJob.models, model])
+    }*/
 
     useEffect(() => {
 
@@ -88,8 +95,8 @@ export default function Jobs() {
                     <p>Loading...</p>
             }
             {
-                showAddModal && createPortal(
-                    <JobModal onClose={() => setShowAddModal(false)} addJob={addJob}/>, document.body
+                showCreateModal && createPortal(
+                    <JobModal onClose={() => setShowCreateModal(false)} addJob={addJob}/>, document.body
                 )
             }
 
@@ -98,6 +105,11 @@ export default function Jobs() {
                     <AddModelToJobModal onClose={() => setShowAddModal(false)} jobId={selectedJob.jobId} />
                     , document.body)
             }
+
+             <button onClick={() => setShowDeleteModal(true)}>Delete model from job</button>
+                        {showDeleteModal && createPortal(
+                                        <DeleteModelFromJobModal onClose={() => setShowDeleteModal(false)} deleteFromJob={deleteModelFromJob} />, document.body
+                                    )}
         </main>
 
 
