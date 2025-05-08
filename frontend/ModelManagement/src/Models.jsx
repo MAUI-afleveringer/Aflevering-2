@@ -3,10 +3,16 @@ import { useState } from "react"
 export default function Models() {
     const [models, setModels] = useState([]);
     const [error, setError] = useState("");
+    const token = localStorage.getItem("token");
+    if (token) {
+            const decoded = jwtDecode(token);
+            console.log(decoded);
+            console.log(decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Manager");
+            const role = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+        }
 
     const fetchModels = async () => {
         const url = "http://localhost:8080/api/models";
-        const token = localStorage.getItem("token");
         console.log("Bruger token:", token);
 
         try {
@@ -34,6 +40,30 @@ export default function Models() {
 
     const createModel = async () => {
         const url = "http://localhost:8080/api/models"
+        console.log(decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"])
+
+        if (role !== "Manager"){
+            alert("You do not have permission to do this. Reason: User not manager");
+            return;
+        }
+
+        try{
+            const response = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(this.form),
+                credentials: "include",
+                "Authorization": "Bearer " + token,
+                "Content-type": "application/json"
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.message || "Failed to create model");
+            }
+        }
+        catch (error){
+            setError("Something went wrong " + error.message);
+        }
     };
     
     /*var url = "https://yourUrl";
