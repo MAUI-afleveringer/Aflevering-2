@@ -51,7 +51,7 @@ export default function JobModal({ onClose, addJob }) {
                 <h3>Create Job</h3>
                 <form action="" className="createForm">
                     <input type="text" className="formInput" placeholder="Customername" value={customerName} onChange={(e) => setCustomerName(e.target.value)} />
-                    <input type="date" c />
+                    <input type="date" className="formInput" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                     <input type="text" className="formInput" placeholder="Customername" value={customerName} onChange={(e) => setCustomerName(e.target.value)} />
                 </form>
             </section>

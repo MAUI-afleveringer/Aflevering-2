@@ -1,13 +1,19 @@
 import { jwtDecode } from "jwt-decode"
 import { useEffect, useState } from "react";
 import React from "react";
+import { createPortal } from "react-dom";
 
 export default function Jobs() {
     const [data, setData] = useState([]);
+    const [showAddModal, setShowAddModal] = useState(false);
+    const [selectedJob, setSelectedJob] = useState(null);
 
     const token = localStorage.getItem("token");
+    const decoded = jwtDecode(token);
+    const role = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-    const fetchAllJobs = async () => {
+
+    const fetchJobs = async () => {
         const url = "http://localhost:8080/api/Jobs";
         const response = await fetch(url,
             {
@@ -24,38 +30,19 @@ export default function Jobs() {
 
     }
 
-    const fetchJobsByModel = async (modelId) => {
-        const url = `http://localhost:8080/api/Models/${modelId}/jobs`;
-        const response = await fetch(url,
-            {
-                method: "GET",
-                credentials: "include",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            }
-        );
-
-        // Add if response succeed here
-        const result = await response.json();
-        setData(result);
-
-    }
-
     function createNewJob(newJob) {
         setData(prevData => [prevData, newJob])
     }
 
     useEffect(() => {
-        const decoded = jwtDecode(token);
-        console.log(decoded);
-        const role = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-        if (role === "Manager") fetchAllJobs();
+        const run = async () => {
+            console.log(decoded);
+            await fetchJobs();
+        }
+        run();
 
-        else if (role === "Model") fetchJobsByModel(decoded["ModelId"]);
-    })
+    }, [])
 
     return (
         <main>
@@ -72,11 +59,19 @@ export default function Jobs() {
                                 <p className="jobId">{job.days}</p>
                                 <p className="jobLocation">{job.location}</p>
                                 <p className="jobComments">{job.comments}</p>
+
+                                {role === "Manager" ? <button onClick={() => { setShowAddModal(true); setSelectedJob(job) }}>Add model to job</button> : null}
                             </section>
                         </React.Fragment>
                     ))
                     :
                     <p>Loading...</p>
+            }
+
+            {
+                showAddModal && createPortal(
+                    <AddModelToJobModal onClose={() => setShowAddModal(false)} jobId={selectedJob.jobId} />
+                    , document.body)
             }
         </main>
 
