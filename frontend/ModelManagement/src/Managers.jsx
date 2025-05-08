@@ -1,20 +1,33 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import ManagerModal from './CreateManagerModal';
+import ManagerModal from './Modals/CreateManagerModal';
+import UpdateManagerModal from './Modals/EditManagerModal';
 import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom'
+import React from 'react';
 
 export default function Managers() {
     const [data, setData] = useState([])
-    const [showModal, setShowModal] = useState(false);
+    const [showCreateModal, setShowCreateModal] = useState(false);
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [selectedManager, setSelectedManager] = useState(null);
     const token = localStorage.getItem('token');
-    if (token) {
-        const decoded = jwtDecode(token);
-        console.log(decoded);
-        console.log(decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Manager");
-    }
+
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log("Error getting token");
+            return;
+        }
+
+        const decoded = jwtDecode(token);
+        const role = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+        if (role !== "Manager") {
+            alert("You are not authorized!")
+            navigate("/jobs");
+        }
         const fetchData = async () => {
             const response = await fetch('http://localhost:8080/api/managers',
                 {
@@ -40,23 +53,49 @@ export default function Managers() {
 
     return (
         <main>
-            <button onClick={() => setShowModal(true)}>Create new manager</button>
+            <button onClick={() => setShowCreateModal(true)}>Create new manager</button>
             <h1>Managers</h1>
             {
                 data ?
                     data.map(manager => (
-                        <section className="manager" key={manager.managerId}>
-                            <p className="managerId">{manager.managerId}</p>
-                            <p className="managerName">{manager.firstName} {manager.lastName}</p>
-                            <p className="managerEmail">{manager.email}</p>
-                        </section>
+                        <React.Fragment key={manager.managerId}>
+                            <section className="manager">
+                                <p className="managerId">{manager.managerId}</p>
+                                <p className="managerName">{manager.firstName} {manager.lastName}</p>
+                                <p className="managerEmail">{manager.email}</p>
+                                <button className="updateBtn" onClick={
+                                    () => {
+                                        setShowUpdateModal(true);
+                                        setSelectedManager(manager);
+                                    }
+                                }>Update Info</button>
+                            </section>
+
+
+                        </React.Fragment>
                     ))
                     : <p>Loading...</p>
             }
 
-            {showModal && createPortal(
-                <ManagerModal onClose={() => setShowModal(false)} addManager={addManager} />, document.body
-            )}
-        </main>
+            {
+                showCreateModal && createPortal(
+                    <ManagerModal onClose={() => setShowCreateModal(false)} addManager={addManager} />, document.body
+                )
+            }
+
+            {
+                showUpdateModal && selectedManager && createPortal(
+                    <UpdateManagerModal
+                        onClose={() => setShowUpdateModal(false)}
+                        managerId={selectedManager.managerId}
+                        currentFirstName={selectedManager.firstName}
+                        CurrentLastName={selectedManager.lastName}
+                        CurrentEmail={selectedManager.email} />, document.body
+                )
+            }
+
+
+        </main >
     )
+
 }
