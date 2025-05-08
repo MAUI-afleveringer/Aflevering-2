@@ -5,17 +5,19 @@ export default function AddModelToJobModal({
     jobId }) {
 
     const [modelId, setModelId] = useState(0);
+    const [error, setError] = useState("");
+
 
     const handleSubmit = async (e) => {
         const token = localStorage.getItem("token");
         e.preventDefault();
-        if (!firstName || !lastName || !email) setError("Please fill all fields!");
+        if (!modelId) setError("Please fill model id!");
 
-        const url = `http://localhost:8080/api/Managers/${managerId}`
+        const url = `http://localhost:8080/api/Jobs/${jobId}/model/${modelId}`
         try {
             const response = await fetch(url, {
                 method: 'POST',
-                body: JSON.stringify({ firstName, lastName, email }),
+                body: JSON.stringify({ jobId, modelId }),
                 headers: new Headers({
                     Authorization: 'bearer ' + token,
                     'Content-Type': 'application/json'
@@ -23,13 +25,14 @@ export default function AddModelToJobModal({
             });
 
             if (response.ok) {
-                const newManager = await response.json();
-                alert("manager updated!");
+                const addedModel = await response.json();
+                alert("Model added!");
+                AddModel(addedModel);
                 onClose();
             }
             else {
-                const errorData = await response.json;
-                setError(errorData.message || "Failed to update manager");
+                const errorData = await response.json();
+                setError(errorData.modelId || "Failed to add model");
             }
         }
         catch (err) {
@@ -43,11 +46,9 @@ export default function AddModelToJobModal({
             <section className="createModal">
                 <h3>Create Manager</h3>
                 <form action="" className="createForm">
-                    <input type="text" name="" id="" className="formInput" placeholder="Firstname" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                    <input type="text" name="" id="" className="formInput" placeholder="Lastname" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                    <input type="text" name="" id="" className="formInput" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="number" className="formInput" placeholder="Id of model" onChange={(e) => setModelId(e.target.value)} />
                     <div className="createBtns">
-                        <input type="button" value="Update Manager" onClick={handleSubmit} />
+                        <input type="button" value="Add Model" onClick={handleSubmit} />
                         <input type="button" value="Close" onClick={onClose} />
                     </div>
                 </form>

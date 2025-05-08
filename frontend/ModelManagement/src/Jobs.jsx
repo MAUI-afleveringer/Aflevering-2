@@ -2,6 +2,7 @@ import { jwtDecode } from "jwt-decode"
 import { useEffect, useState } from "react";
 import React from "react";
 import { createPortal } from "react-dom";
+import AddModelToJobModal from "./Modals/AddModelToJobModal";
 
 export default function Jobs() {
     const [data, setData] = useState([]);
@@ -34,6 +35,10 @@ export default function Jobs() {
         setData(prevData => [prevData, newJob])
     }
 
+    function addModel(model) {
+        setSelectedJob(prevSelectedJob.models => [...selectedJob.models, model])
+    }
+
     useEffect(() => {
 
         const run = async () => {
@@ -60,7 +65,17 @@ export default function Jobs() {
                                 <p className="jobLocation">{job.location}</p>
                                 <p className="jobComments">{job.comments}</p>
 
-                                {role === "Manager" ? <button onClick={() => { setShowAddModal(true); setSelectedJob(job) }}>Add model to job</button> : null}
+                                {role === "Manager" &&
+                                    <section className="associatedModels">
+                                        <button onClick={() => { setShowAddModal(true); setSelectedJob(job) }}>Add model to job</button>
+                                        {job.models.map(model => (
+                                            <section key={model.modelId}>
+                                                <p>{model.firstName} {model.lastName}</p>
+                                                <p>{model.email}</p>
+                                            </section>
+                                        ))}
+                                    </section>
+                                }
                             </section>
                         </React.Fragment>
                     ))
