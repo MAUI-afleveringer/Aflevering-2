@@ -50,7 +50,7 @@ export default function Models() {
     return (
         <section className="mainPage">
             <li className="listStyle">
-            <h1 className="header">Models-page</h1>
+            <h1 className="header">Models</h1>
             <li className="listStyle">
             <button className="paddingBetweenButtons" onClick={fetchModels}>Fetch models</button>
             <button className="paddingBetweenButtons" onClick={() => setShowModal(true)}>Create new model</button>
@@ -68,6 +68,7 @@ export default function Models() {
                         <p>Address: {model.addressLine1}</p>
                         <p>Zip code: {model.zip}</p>
                         <p>City: {model.city}</p>
+                        <p>Model ID: {model.modelId}</p>
 
 
                     </section>
