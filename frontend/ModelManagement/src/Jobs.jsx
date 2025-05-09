@@ -45,9 +45,15 @@ export default function Jobs() {
         setData(prevData => [prevData, deleteModelFromJob])
     }
 
-    /*function addModel(model) {
-        setSelectedJob(prevSelectedJob.models => [...selectedJob.models, model])
-    }*/
+    function addModel(newModelData) {
+        setSelectedJob(prevSelectedJob => ({
+            ...prevSelectedJob, // Spreading the previous states job
+
+            // Overriding the model property with existing models + added model
+            models: [...(Array.isArray(prevSelectedJob.models) ? prevSelectedJob.models : []), newModelData]
+        }));
+    }
+
 
     useEffect(() => {
 
@@ -62,7 +68,7 @@ export default function Jobs() {
     //button added for job and createPortal added
     return (
         <main>
-            
+
             <button onClick={() => setShowCreateModal(true)}>Create new Job listing</button>
             <h1>Jobs</h1>
             {
@@ -96,7 +102,7 @@ export default function Jobs() {
             }
             {
                 showCreateModal && createPortal(
-                    <JobModal onClose={() => setShowCreateModal(false)} addJob={addJob}/>, document.body
+                    <JobModal onClose={() => setShowCreateModal(false)} addJob={addJob} />, document.body
                 )
             }
 
@@ -106,10 +112,10 @@ export default function Jobs() {
                     , document.body)
             }
 
-             <button onClick={() => setShowDeleteModal(true)}>Delete model from job</button>
-                        {showDeleteModal && createPortal(
-                                        <DeleteModelFromJobModal onClose={() => setShowDeleteModal(false)} deleteFromJob={deleteModelFromJob} />, document.body
-                                    )}
+            <button onClick={() => setShowDeleteModal(true)}>Delete model from job</button>
+            {showDeleteModal && createPortal(
+                <DeleteModelFromJobModal onClose={() => setShowDeleteModal(false)} deleteFromJob={deleteModelFromJob} />, document.body
+            )}
         </main>
 
 

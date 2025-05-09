@@ -7,14 +7,14 @@ import Jobs from './Jobs.jsx'
 import ProtectedRoute from './ProtectedRoute.jsx'
 
 import './App.css'
-import {BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 
 import NavigationBar from './NavigationBar.jsx'
 
 function AppRoutes() {
   const location = useLocation();
   return (
-      <>
+    <>
       {location.pathname !== '/' && <NavigationBar />}
       <Routes>
         <Route path="/" element={<Login />} />
@@ -41,7 +41,7 @@ function AppRoutes() {
           </ProtectedRoute>
         } />
       </Routes>
-      </>
+    </>
   );
 }
 
