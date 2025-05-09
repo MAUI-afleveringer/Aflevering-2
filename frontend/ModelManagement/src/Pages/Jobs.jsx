@@ -2,10 +2,17 @@ import { jwtDecode } from "jwt-decode"
 import { useEffect, useState } from "react";
 import React from "react";
 import { createPortal } from "react-dom";
+<<<<<<< Updated upstream:frontend/ModelManagement/src/Pages/Jobs.jsx
 import AddModelToJobModal from "../Modals/AddModelToJobModal";
 import DeleteModelFromJobModal from "../Modals/DeleteModelFromJob";
 
 import JobModal from "../Modals/CreateJobModal";
+=======
+import AddModelToJobModal from "./Modals/AddModelToJobModal";
+import DeleteModelFromJobModal from "./Modals/DeleteModelFromJob";
+import './App.css'
+import JobModal from "./Modals/CreateJobModal";
+>>>>>>> Stashed changes:frontend/ModelManagement/src/Jobs.jsx
 
 export default function Jobs() {
     const [data, setData] = useState([]);
@@ -79,34 +86,50 @@ export default function Jobs() {
 
     //button added for job and createPortal added
     return (
+<<<<<<< Updated upstream:frontend/ModelManagement/src/Pages/Jobs.jsx
         <main className="mainPage">
             
             <button onClick={() => setShowCreateModal(true)}>Create new Job listing</button>
             <h1>Jobs</h1>
+=======
+        <main>
+            <section className="Header">
+                <h1 className="Header-title">Jobs</h1>
+                <button onClick={() => setShowCreateModal(true)}>Create new Job listing</button> 
+            </section>
+
+>>>>>>> Stashed changes:frontend/ModelManagement/src/Jobs.jsx
             {
                 data ?
                     data.map(job => (
                         <React.Fragment key={job.jobId}>
-                            <section className="job">
-                                <p className="jobId">{job.jobId}</p>
-                                <p className="jobCustomer">{job.constumer}</p>
-                                <p className="jobStartDate">{job.startDate}</p>
-                                <p className="jobId">{job.days}</p>
-                                <p className="jobLocation">{job.location}</p>
-                                <p className="jobComments">{job.comments}</p>
+                            <section className="allJobs-box">
+                                <section className="job">
 
-                                {role === "Manager" &&
-                                    <section className="associatedModels">
-                                        <button onClick={() => { setShowAddModal(true); setSelectedJob(job) }}>Add model to job</button>
-                                        {job.models.map(model => (
-                                            <section key={model.modelId}>
-                                                <p>{model.firstName} {model.lastName}</p>
-                                                <p>{model.email}</p>
-                                            </section>
-                                        ))}
-                                    </section>
-                                }
+                                    <p className="jobLocation">{job.location}</p>
+                                    <p className="jobCustomer">{job.constumer}</p>
+                                    <p className="jobStartDate">{job.startDate}</p>
+                                    <p className="jobId">Job ID: {job.days}</p>
+                                    <p className="jobComments">Extra comment: {job.comments}</p>
+
+
+
+                                    {role === "Manager" &&
+                                        <section className="associatedModels">
+
+                                            {job.models.map(model => (
+                                                <section key={model.modelId}>
+                                                    <p>Model name: {model.firstName} {model.lastName}</p>
+                                                    <p>model email: {model.email}</p>
+                                                </section>
+                                            ))}
+                                            <button onClick={() => { setShowAddModal(true); setSelectedJob(job) }}>Add model to job</button>
+                                        </section>
+                                    }
+
+                                </section>
                             </section>
+
                         </React.Fragment>
                     ))
                     :

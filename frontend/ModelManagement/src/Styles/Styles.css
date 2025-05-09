@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream:frontend/ModelManagement/src/Styles/Styles.css
 body {
     background-color: #4D5061;
 }
@@ -22,6 +23,16 @@ body {
     background-color: #4D5061;
 }
 
+=======
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/*overall page color / font*/
+body{
+    background-color: rgb(251, 251, 251);
+    font-family: 'Bebas Neue', sans-serif;
+    color:black
+}
+>>>>>>> Stashed changes:frontend/ModelManagement/src/App.css
 * {
     padding: 0;
     margin: 0;
@@ -33,11 +44,12 @@ body {
     top: 50%;
     width: 30%;
     transform: translate(-50%, -50%);
-    background: red;
+    background: rgba(193, 190, 190, 0.826);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
+    border-radius: 10px;
 }
 
 .createForm {
@@ -67,3 +79,126 @@ body {
     left: 0;
     top: 0;
 }
+
+
+
+/* Webiste looks below here */
+
+
+/* login page*/
+
+#loginButtons{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 5px;
+}
+
+#loginForm{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 5px 10px
+}
+
+  /*normal buttons and login button*/
+button, 
+input,
+input.formInput::placeholder,
+#loginBtn{
+    background-color: hsl(0, 0%, 27%);
+    color: rgb(210, 210, 210);
+    padding: 5px 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  
+  /*normal buttons and login button*/
+  button:hover,
+  #loginBtn:hover {
+    background-color: #8d8a7a;
+    transform: scale(1.03);
+  }
+  
+  button:active{
+    transform: scale(0.97);
+  }
+
+/* headers */
+.Header {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 20px;
+    padding-bottom: 100px;
+}
+
+.Header-title, 
+h1{
+    display: inline-block;
+    font-size: 50px;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+
+.p{
+    margin: 10px;
+    line-height: 1.6;
+}
+
+.allJobs-box {
+    padding: 0 5vw; /* or try 2rem or 40px */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* space between job cards */
+  }
+  
+  
+
+.job{
+    background: blanchedalmond;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.451);
+    transition: transform 0.1s ease-in-out;
+    text-align: center;
+}
+
+.job:hover{
+    transform: scale(1.02);
+}
+
+.job p {
+    margin: 5px;
+    font-size: 17px;
+}
+
+.jobLocation {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: 555;
+}
+
+.jobCustomer {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.associatedModels {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid #000000;
+  }
+  
+  .associatedModels section {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background-color: #f9f9f9;
+    border-radius: 0.5rem;
+  }
