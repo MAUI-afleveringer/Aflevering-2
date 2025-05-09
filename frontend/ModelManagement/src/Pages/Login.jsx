@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
-import './App.css'
 
 export default function Login() {
     const [error, setError] = useState("");
@@ -61,17 +60,6 @@ export default function Login() {
 
 
     return (
-<<<<<<< Updated upstream:frontend/ModelManagement/src/Pages/Login.jsx
-        <section className="mainPage" id="loginWrapper">
-            <form action="" id="loginForm" onSubmit={handleSubmit}>
-                <input type="text" name="" id="" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" name="" id="" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                <input type="submit" value="Login" />
-                {error && <p className="error">{error}</p>}
-            </form>
-            <button onClick={handleLogout}>Log Out</button>
-        </section>
-=======
         <div>
             <h1>Login</h1>
             <section id="loginWrapper">
@@ -91,6 +79,5 @@ export default function Login() {
             </section>
         </div>
 
->>>>>>> Stashed changes:frontend/ModelManagement/src/Login.jsx
     )
 } 
