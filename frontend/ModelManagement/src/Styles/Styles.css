@@ -200,3 +200,11 @@ h1 {
 /* Models.jsx */
 
 /* Model */
+
+.multiInputWrapper {
+    display: flex;
+}
+
+.multiInputWrapper input {
+    flex: 1;
+}

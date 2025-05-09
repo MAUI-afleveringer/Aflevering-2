@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 
 export default function ModelModal({ onClose, addModel }) {
 
-    const [firstName, setFirstName] = useState(""); 
-    const [lastName, setLastName] = useState(""); 
-    const [email, setEmail] = useState(""); 
-    const [phoneNo, setPhoneNo] = useState(""); 
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNo, setPhoneNo] = useState("");
     const [addressLine1, setAddressLine1] = useState("");
     const [addressLine2, setAddressLine2] = useState("");
     const [zip, setZip] = useState("");
@@ -18,7 +18,7 @@ export default function ModelModal({ onClose, addModel }) {
     const [hairColor, setHairColor] = useState("");
     const [eyeColor, setEyeColor] = useState("");
     const [comments, setComments] = useState("");
-    const [password, setPassword] = useState(""); 
+    const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const token = localStorage.getItem("token");
 
@@ -28,7 +28,7 @@ export default function ModelModal({ onClose, addModel }) {
         setError("");
 
         const url = "http://localhost:8080/api/Models"
-        const birthDateIso = birthDate ? new Date(birthDate).toISOString(): null;
+        const birthDateIso = birthDate ? new Date(birthDate).toISOString() : null;
         const newModel = {
             firstName,
             lastName,
@@ -49,8 +49,8 @@ export default function ModelModal({ onClose, addModel }) {
             password
         };
 
-        for (const [key, value] of Object.entries(newModel)){
-            if(!value || value.toString().trim() === ""){
+        for (const [key, value] of Object.entries(newModel)) {
+            if (!value || value.toString().trim() === "") {
                 setError(`Field (${key}) needs to be filled`)
                 return;
             }
@@ -90,21 +90,28 @@ export default function ModelModal({ onClose, addModel }) {
             <section className="createModal">
                 <h3>Create Model</h3>
                 <form action="" className="createForm">
-                    <input type="text" name="" id="" className="formInput" placeholder="Firstname" onChange={(e) => setFirstName(e.target.value)} />
-                    <input type="text" name="" id="" className="formInput" placeholder="Lastname" onChange={(e) => setLastName(e.target.value)} />
+                    <div className="multiInputWrapper">
+                        <input type="text" name="" id="" className="formInput" placeholder="Firstname" onChange={(e) => setFirstName(e.target.value)} />
+                        <input type="text" name="" id="" className="formInput" placeholder="Lastname" onChange={(e) => setLastName(e.target.value)} />
+                    </div>
                     <input type="text" name="" id="" className="formInput" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                     <input type="text" name="" id="" className="formInput" placeholder="Phone Number" onChange={(e) => setPhoneNo(e.target.value)} />
                     <input type="text" name="" id="" className="formInput" placeholder="Address Line 1" onChange={(e) => setAddressLine1(e.target.value)} />
                     <input type="text" name="" id="" className="formInput" placeholder="Address Line 2" onChange={(e) => setAddressLine2(e.target.value)} />
-                    <input type="text" name="" id="" className="formInput" placeholder="Zip" onChange={(e) => setZip(e.target.value)} />
-                    <input type="text" name="" id="" className="formInput" placeholder="City" onChange={(e) => setCity(e.target.value)} />
-                    <input type="text" name="" id="" className="formInput" placeholder="Country" onChange={(e) => setCountry(e.target.value)} />
-                    <input type="date" name="" id="" className="formInput" placeholder="Birthdate" onChange={(e) => setBirthDate(e.target.value)} /> 
+                    <div className="multiInputWrapper">
+                        <input type="text" name="" id="" className="formInput" placeholder="Zip" onChange={(e) => setZip(e.target.value)} />
+                        <input type="text" name="" id="" className="formInput" placeholder="City" onChange={(e) => setCity(e.target.value)} />
+                        <input type="text" name="" id="" className="formInput" placeholder="Country" onChange={(e) => setCountry(e.target.value)} />
+                    </div>
+
+                    <input type="date" name="" id="" className="formInput" placeholder="Birthdate" onChange={(e) => setBirthDate(e.target.value)} />
                     <input type="text" name="" id="" className="formInput" placeholder="Nationality" onChange={(e) => setNationality(e.target.value)} />
                     <input type="text" name="" id="" className="formInput" placeholder="Height" onChange={(e) => setHeight(e.target.value)} />
                     <input type="text" name="" id="" className="formInput" placeholder="Shoe Size" onChange={(e) => setShoeSize(e.target.value)} />
-                    <input type="text" name="" id="" className="formInput" placeholder="Hair Color" onChange={(e) => setHairColor(e.target.value)} />
-                    <input type="text" name="" id="" className="formInput" placeholder="Eye Color" onChange={(e) => setEyeColor(e.target.value)} />
+                    <div className="multiInputWrapper">
+                        <input type="text" name="" id="" className="formInput" placeholder="Hair Color" onChange={(e) => setHairColor(e.target.value)} />
+                        <input type="text" name="" id="" className="formInput" placeholder="Eye Color" onChange={(e) => setEyeColor(e.target.value)} />
+                    </div>
                     <input type="text" name="" id="" className="formInput" placeholder="Comments" onChange={(e) => setComments(e.target.value)} />
                     <input type="password" name="" id="" className="formInput" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                     <div className="createBtns">

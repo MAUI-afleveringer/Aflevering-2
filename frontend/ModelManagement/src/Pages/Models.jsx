@@ -60,12 +60,12 @@ export default function Models() {
                 {models.map((model) => (
 
                     <section className="job">
-                        <p>{model.firstName} {model.lastName}</p>
-                        <p>{model.email}</p>
-                        <p>{model.phoneNo}</p>
-                        <p>{model.addressLine1}</p>
-                        <p>{model.zip}</p>
-                        <p>{model.city}</p>
+                        <p>Name: {model.firstName} {model.lastName}</p>
+                        <p>Email: {model.email}</p>
+                        <p>Phone: {model.phoneNo}</p>
+                        <p>Address: {model.addressLine1}</p>
+                        <p>Zip code: {model.zip}</p>
+                        <p>City: {model.city}</p>
 
 
                     </section>
@@ -75,6 +75,6 @@ export default function Models() {
             {showModal && createPortal(
                 <ModelModal onClose={() => setShowModal(false)} addModel={addModel} />, document.body
             )}
-        </main>
+        </section>
     );
 }
