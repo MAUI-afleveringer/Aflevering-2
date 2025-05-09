@@ -49,16 +49,17 @@ export default function Models() {
 
     return (
         <section className="mainPage">
-            <h2>Models-page</h2>
+            <h1 className="header">Models-page</h1>
 
             <button onClick={fetchModels}>Fetch models</button>
+            <button onClick={() => setShowModal(true)}>Create new model</button>
 
             {error && <p className="error">{error}</p>}
 
-            <main className="modelWrapper">
+            <main className="allJobs-box">
                 {models.map((model) => (
 
-                    <section className="model">
+                    <section className="job">
                         <p>{model.firstName} {model.lastName}</p>
                         <p>{model.email}</p>
                         <p>{model.phoneNo}</p>
@@ -70,7 +71,7 @@ export default function Models() {
                     </section>
                 ))}
             </main>
-            <button onClick={() => setShowModal(true)}>Create new model</button>
+
             {showModal && createPortal(
                 <ModelModal onClose={() => setShowModal(false)} addModel={addModel} />, document.body
             )}
