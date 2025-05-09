@@ -22,12 +22,16 @@ export default function NavigationBar() {
     };
 
     return (
-        <nav className= "nav" style={{ padding: '10px', borderBottom: '5px solid #ccc'}}>
-            <button className="buttonNavbar" onClick={handleNavigateToJobs}>Jobs</button>
-            <button className="buttonNavbar" onClick={handleNavigateToModels}>Models</button>
-            <button className="buttonNavbar" onClick={handleNavigateToManagers}>Managers</button>
-            <button className="buttonNavbar" onClick={handleNavigateToExpenses}>Expenses</button>
-            <button className="buttonNavbar" onClick={handleLogout}>Log Out</button>
+        <nav className="nav" style={{ padding: '10px', borderBottom: '0px solid #ccc', marginRight: '10px' }}>
+            <a style={{ marginRight: '10px' }}>
+                <button className="buttonNavbar" onClick={handleNavigateToJobs}>Jobs</button>
+                <button className="buttonNavbar" onClick={handleNavigateToModels}>Models</button>
+                <button className="buttonNavbar" onClick={handleNavigateToManagers}>Managers</button>
+                <button className="buttonNavbar" onClick={handleNavigateToExpenses}>Expenses</button>
+            </a>
+            <b>
+                <button className="buttonNavbar" onClick={handleLogout}>Log Out</button>
+            </b>
 
         </nav>
     );

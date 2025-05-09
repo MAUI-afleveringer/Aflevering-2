@@ -9,12 +9,12 @@ export default function Models() {
     const [showModal, setShowModal] = useState(false);
     const token = localStorage.getItem("token");
     if (token) {
-            const decoded = jwtDecode(token);
-            console.log(decoded);
-            console.log(decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Manager");
-            console.log(decoded["ModelId"]); // get ModelId 
-            const role = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
-        }
+        const decoded = jwtDecode(token);
+        console.log(decoded);
+        console.log(decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Manager");
+        console.log(decoded["ModelId"]); // get ModelId 
+        const role = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+    }
 
     const fetchModels = async () => {
         const url = "http://localhost:8080/api/models";
@@ -42,10 +42,10 @@ export default function Models() {
             setError("Something went wrong: " + error.message);
         }
     };
-    
-    function addModel(newModel)  {
+
+    function addModel(newModel) {
         setModels(prevData => [...prevData, newModel])
-    }; 
+    };
 
     return (
         <section className="mainPage">
@@ -55,15 +55,25 @@ export default function Models() {
 
             {error && <p className="error">{error}</p>}
 
-            <ul>
-                {models.map((model, index) => (
-                    <li key={index}>{JSON.stringify(model)}</li>
+            <main className="modelWrapper">
+                {models.map((model) => (
+
+                    <section className="model">
+                        <p>{model.firstName} {model.lastName}</p>
+                        <p>{model.email}</p>
+                        <p>{model.phoneNo}</p>
+                        <p>{model.addressLine1}</p>
+                        <p>{model.zip}</p>
+                        <p>{model.city}</p>
+
+
+                    </section>
                 ))}
-            </ul>
+            </main>
             <button onClick={() => setShowModal(true)}>Create new model</button>
             {showModal && createPortal(
-                            <ModelModal onClose={() => setShowModal(false)} addModel={addModel} />, document.body
-                        )}
+                <ModelModal onClose={() => setShowModal(false)} addModel={addModel} />, document.body
+            )}
         </section>
     );
 }

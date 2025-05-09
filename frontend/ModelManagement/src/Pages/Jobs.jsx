@@ -2,9 +2,9 @@ import { jwtDecode } from "jwt-decode"
 import { useEffect, useState } from "react";
 import React from "react";
 import { createPortal } from "react-dom";
-import AddModelToJobModal from "./Modals/AddModelToJobModal";
-import DeleteModelFromJobModal from "./Modals/DeleteModelFromJob";
-import JobModal from "./Modals/CreateJobModal";
+import AddModelToJobModal from "../Modals/AddModelToJobModal";
+import DeleteModelFromJobModal from "../Modals/DeleteModelFromJob";
+import JobModal from "../Modals/CreateJobModal";
 
 export default function Jobs() {
     const [data, setData] = useState([]);
@@ -82,6 +82,7 @@ export default function Jobs() {
             <section className="Header">
                 <h1 className="Header-title">Jobs</h1>
                 <button onClick={() => setShowCreateModal(true)}>Create new Job listing</button>
+                <button onClick={() => setShowDeleteModal(true)}>Delete model from job</button>
             </section>
 
             {
@@ -132,7 +133,7 @@ export default function Jobs() {
                     , document.body)
             }
 
-            <button onClick={() => setShowDeleteModal(true)}>Delete model from job</button>
+
             {showDeleteModal && createPortal(
                 <DeleteModelFromJobModal onClose={() => setShowDeleteModal(false)} deleteFromJob={deleteModelFromJob} />, document.body
             )}
