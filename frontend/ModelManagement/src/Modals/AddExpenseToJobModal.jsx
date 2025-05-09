@@ -4,7 +4,7 @@ const token = localStorage.getItem("token");
 
 export default function ExpenseModal({ onClose, addExpense }) {
     const decoded = jwtDecode(token);
-    const modelId = decoded["ModelId"];
+
 
     const [jobId, setJobId] = useState("");
     const [date, setDate] = useState("");
@@ -13,6 +13,7 @@ export default function ExpenseModal({ onClose, addExpense }) {
     const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
+        const modelId = decoded["ModelId"];
         e.preventDefault();
         setError("");
 
