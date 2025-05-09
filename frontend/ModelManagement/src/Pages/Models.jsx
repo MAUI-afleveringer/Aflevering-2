@@ -48,7 +48,7 @@ export default function Models() {
     }; 
 
     return (
-        <section>
+        <section className="mainPage">
             <h2>Models-page</h2>
 
             <button onClick={fetchModels}>Fetch models</button>

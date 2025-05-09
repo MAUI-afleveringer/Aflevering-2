@@ -79,8 +79,8 @@ export default function Jobs() {
 
     //button added for job and createPortal added
     return (
-        <main>
-
+        <main className="mainPage">
+            
             <button onClick={() => setShowCreateModal(true)}>Create new Job listing</button>
             <h1>Jobs</h1>
             {

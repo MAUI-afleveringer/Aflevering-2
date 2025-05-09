@@ -52,7 +52,7 @@ export default function Managers() {
     }
 
     return (
-        <main>
+        <main className='mainPage'>
             <button onClick={() => setShowCreateModal(true)}>Create new manager</button>
             <h1>Managers</h1>
             {
