@@ -79,11 +79,12 @@ export default function Jobs() {
     //button added for job and createPortal added
     return (
         <main>
-            <section className="Header">
+            <li className="listStyle">
                 <h1 className="Header-title">Jobs</h1>
-                <button onClick={() => setShowCreateModal(true)}>Create new Job listing</button>
-                <button onClick={() => setShowDeleteModal(true)}>Delete model from job</button>
-            </section>
+                <li className="listStyle">
+                <button className="paddingBetweenButtons" onClick={() => setShowCreateModal(true)}>Create new Job listing</button>
+                <button className="paddingBetweenButtons" onClick={() => setShowDeleteModal(true)}>Delete model from job</button>
+            </li></li>
 
             {
                 data ?

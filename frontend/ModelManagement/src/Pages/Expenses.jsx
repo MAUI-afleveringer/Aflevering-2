@@ -11,9 +11,13 @@ export default function Expenses() {
     };
     return (
         <main className="mainPage">
-            <h1>Expenses</h1>
+            <li className="listStyle">
+                
+            <h1 className="headers">Expenses</h1>
             <br></br>
-            <button onClick={() => setShowModal(true)}>Add expense to job</button>
+            <li className="listStyle">
+            <button className="paddingBetweenButtons" onClick={() => setShowModal(true)}>Add expense to job</button>
+            </li></li>
             {showModal && createPortal(
                 <ExpenseModal onClose={() => setShowModal(false)} addExpense={addExpense} />, document.body
             )}
