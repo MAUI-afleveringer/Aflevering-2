@@ -10,7 +10,7 @@ export default function Expenses() {
         setExpence(prevData => [...prevData, newExpense])
     }; 
     return (
-        <main>
+        <main className="mainPage">
         <h1>Expenses</h1>
         <button onClick={() => setShowModal(true)}>Add expense to job</button>
                     {showModal && createPortal(

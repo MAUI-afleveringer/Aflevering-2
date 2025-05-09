@@ -7,7 +7,6 @@ import Jobs from './Pages/Jobs.jsx'
 import ProtectedRoute from './ProtectedRoute.jsx'
 import "./Styles/Styles.css"
 
-import './App.css'
 import {BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 
 import NavigationBar from './NavigationBar.jsx'

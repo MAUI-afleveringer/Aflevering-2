@@ -60,7 +60,7 @@ export default function Login() {
 
 
     return (
-        <section id="loginWrapper">
+        <section className="mainPage" id="loginWrapper">
             <form action="" id="loginForm" onSubmit={handleSubmit}>
                 <input type="text" name="" id="" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                 <input type="password" name="" id="" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
