@@ -1,4 +1,4 @@
-import ExpenseModal from "./Modals/AddExpenseToJobModal";
+import ExpenseModal from "../Modals/AddExpenseToJobModal";
 import { createPortal } from 'react-dom';
 import { useState } from "react"
 
