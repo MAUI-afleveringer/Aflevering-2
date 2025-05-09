@@ -37,32 +37,19 @@ export default function Jobs() {
 
     // Function to add job 
     function addJob(newJob) {
-        setData(prevData => [prevData, newJob])
+        setData(prevData => [...prevData, newJob])
     }
 
     function deleteModelFromJob(deleteModelFromJob) {
-        setData(prevData => [prevData, deleteModelFromJob])
+        setData(prevData => [...prevData, deleteModelFromJob])
     }
 
-    function addModel(jobId, newModelData) {
+    function addModel(updatedJob) {
         setData(prevData =>
-            prevData.map(job => {
-                if (job.jobId === jobId) {
-                    const existingModels = Array.isArray(job.models) ? job.models : [];
-                    return {
-                        ...job,
-                        models: [...existingModels, newModelData]
-                    };
-                }
-                return job;
-            })
+            prevData.map(job =>
+                job.jobId === updatedJob.jobId ? updatedJob : job
+            )
         );
-        if (selectedJob && selectedJob.jobId === jobId) {
-            setSelectedJob(prevSelectedJob => ({
-                ...prevSelectedJob,
-                models: [...(Array.isArray(prevSelectedJob.models) ? prevSelectedJob.models : []), newModelData]
-            }));
-        }
     }
 
 
@@ -82,9 +69,9 @@ export default function Jobs() {
             <li className="listStyle">
                 <h1 className="Header-title">Jobs</h1>
                 <li className="listStyle">
-                <button className="paddingBetweenButtons" onClick={() => setShowCreateModal(true)}>Create new Job listing</button>
-                <button className="paddingBetweenButtons" onClick={() => setShowDeleteModal(true)}>Delete model from job</button>
-            </li></li>
+                    <button className="paddingBetweenButtons" onClick={() => setShowCreateModal(true)}>Create new Job listing</button>
+                    <button className="paddingBetweenButtons" onClick={() => setShowDeleteModal(true)}>Delete model from job</button>
+                </li></li>
 
             {
                 data ?
@@ -94,9 +81,9 @@ export default function Jobs() {
                                 <section className="job">
 
                                     <p className="jobLocation">{job.location}</p>
-                                    <p className="jobCustomer">{job.constumer}</p>
+                                    <p className="jobCustomer">{job.customer}</p>
                                     <p className="jobStartDate">{job.startDate}</p>
-                                    <p className="jobId">Job ID: {job.days}</p>
+                                    <p className="jobId">Job ID: {job.jobId}</p>
                                     <p className="jobComments">Extra comment: {job.comments}</p>
 
 
@@ -104,12 +91,15 @@ export default function Jobs() {
                                     {role === "Manager" &&
                                         <section className="associatedModels">
 
-                                            {job.models.map(model => (
-                                                <section key={model.modelId}>
-                                                    <p>Model name: {model.firstName} {model.lastName}</p>
-                                                    <p>model email: {model.email}</p>
-                                                </section>
-                                            ))}
+                                            {Array.isArray(job.models) && job.models.length > 0 ? (
+                                                job.models.map(model => (
+                                                    <section key={model.modelId}>
+                                                        <p>Model name: {model.firstName} {model.lastName}</p>
+                                                        <p>model email: {model.email}</p>
+                                                    </section>
+                                                )))
+                                                : (<p>No models assigned to this job</p>)
+                                            }
                                             <button onClick={() => { setShowAddModal(true); setSelectedJob(job) }}>Add model to job</button>
                                         </section>
                                     }

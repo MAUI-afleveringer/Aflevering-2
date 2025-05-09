@@ -17,10 +17,10 @@ export default function ExpenseModal({ onClose, addExpense }) {
         setError("");
 
         const url = "http://localhost:8080/api/Expenses"
-        const dateIso = date ? new Date(date).toISOString(): null;
+        const dateIso = date ? new Date(date).toISOString() : null;
 
-        for (const [key, value] of Object.entries({jobId, dateIso, text, amount})){
-            if(!value || value.toString().trim() === ""){
+        for (const [key, value] of Object.entries({ jobId, dateIso, text, amount })) {
+            if (!value || value.toString().trim() === "") {
                 setError(`Field (${key}) needs to be filled`)
                 return;
             }
@@ -29,7 +29,7 @@ export default function ExpenseModal({ onClose, addExpense }) {
         try {
             // console.log(modelId)
             // console.log(JSON.stringify(newModel, null, 2));
-            if (amount <= 0){
+            if (amount <= 0) {
                 setError("Amount must be bigger than 0");
                 return;
             }
@@ -39,7 +39,7 @@ export default function ExpenseModal({ onClose, addExpense }) {
                     Authorization: 'bearer ' + token,
                     'Content-Type': 'application/json'
                 }),
-                body: JSON.stringify({modelId, jobId, dateIso, text, amount})
+                body: JSON.stringify({ modelId, jobId, dateIso, text, amount })
             });
 
             if (response.ok) {
