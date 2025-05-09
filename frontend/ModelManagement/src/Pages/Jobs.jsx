@@ -45,13 +45,25 @@ export default function Jobs() {
         setData(prevData => [prevData, deleteModelFromJob])
     }
 
-    function addModel(newModelData) {
-        setSelectedJob(prevSelectedJob => ({
-            ...prevSelectedJob, // Spreading the previous states job
-
-            // Overriding the model property with existing models + added model
-            models: [...(Array.isArray(prevSelectedJob.models) ? prevSelectedJob.models : []), newModelData]
-        }));
+    function addModel(jobId, newModelData) {
+        setData(prevData =>
+            prevData.map(job => {
+                if (job.jobId === jobId) {
+                    const existingModels = Array.isArray(job.models) ? job.models : [];
+                    return {
+                        ...job,
+                        models: [...existingModels, newModelData]
+                    };
+                }
+                return job;
+            })
+        );
+        if (selectedJob && selectedJob.jobId === jobId) {
+            setSelectedJob(prevSelectedJob => ({
+                ...prevSelectedJob,
+                models: [...(Array.isArray(prevSelectedJob.models) ? prevSelectedJob.models : []), newModelData]
+            }));
+        }
     }
 
 
@@ -108,7 +120,7 @@ export default function Jobs() {
 
             {
                 showAddModal && createPortal(
-                    <AddModelToJobModal onClose={() => setShowAddModal(false)} jobId={selectedJob.jobId} />
+                    <AddModelToJobModal onClose={() => setShowAddModal(false)} AddModel={addModel} jobId={selectedJob.jobId} />
                     , document.body)
             }
 

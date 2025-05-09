@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 
 export default function AddModelToJobModal({
     onClose,
-    jobId }) {
+    jobId,
+    AddModel }) {
 
     const [modelId, setModelId] = useState(0);
     const [error, setError] = useState("");
