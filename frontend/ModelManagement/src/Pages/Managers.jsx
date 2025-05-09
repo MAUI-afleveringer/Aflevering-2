@@ -53,29 +53,38 @@ export default function Managers() {
 
     return (
         <main className='mainPage'>
-            <button onClick={() => setShowCreateModal(true)}>Create new manager</button>
-            <h1>Managers</h1>
+            <h1 className='headers'>Managers</h1>
+            
+            <button className='buttonNavbar' onClick={() => setShowCreateModal(true)}>Create new manager</button>
+
+            <section className="allJobs-box">
+
+            <div className='job'>
             {
-                data ?
-                    data.map(manager => (
-                        <React.Fragment key={manager.managerId}>
-                            <section className="manager">
-                                <p className="managerId">{manager.managerId}</p>
-                                <p className="managerName">{manager.firstName} {manager.lastName}</p>
-                                <p className="managerEmail">{manager.email}</p>
-                                <button className="updateBtn" onClick={
-                                    () => {
-                                        setShowUpdateModal(true);
-                                        setSelectedManager(manager);
-                                    }
-                                }>Update Info</button>
-                            </section>
+            data ?
+                data.map(manager => (
+                    <React.Fragment key={manager.managerId}>
+                        <section className="manager">
+                            <p className="managerId">{manager.managerId}</p>
+                            <p className="managerName">{manager.firstName} {manager.lastName}</p>
+                            <p className="managerEmail">{manager.email}</p>
+                            <button className="updateBtn" onClick={
+                                () => {
+                                    setShowUpdateModal(true);
+                                    setSelectedManager(manager);
+                                }
+                            }>Update Info</button>
+                        </section>
 
 
-                        </React.Fragment>
-                    ))
-                    : <p>Loading...</p>
+                    </React.Fragment>
+                ))
+                : <p>Loading...</p>
             }
+            </div>
+
+            </section>
+            
 
             {
                 showCreateModal && createPortal(

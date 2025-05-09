@@ -48,10 +48,8 @@ export default function Models() {
     };
 
     return (
-        <section className="mainPage">
-            <h2>Models-page</h2>
-
-            <button onClick={fetchModels}>Fetch models</button>
+        <main className="mainPage">
+            <h1>Models-page</h1>
 
             {error && <p className="error">{error}</p>}
 
@@ -70,10 +68,11 @@ export default function Models() {
                     </section>
                 ))}
             </main>
+            <button onClick={fetchModels}>Fetch models</button>
             <button onClick={() => setShowModal(true)}>Create new model</button>
             {showModal && createPortal(
                 <ModelModal onClose={() => setShowModal(false)} addModel={addModel} />, document.body
             )}
-        </section>
+        </main>
     );
 }
