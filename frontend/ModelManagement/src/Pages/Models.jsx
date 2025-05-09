@@ -75,6 +75,6 @@ export default function Models() {
             {showModal && createPortal(
                 <ModelModal onClose={() => setShowModal(false)} addModel={addModel} />, document.body
             )}
-        </section>
+        </main>
     );
 }
