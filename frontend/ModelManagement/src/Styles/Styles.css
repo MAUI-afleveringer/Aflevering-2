@@ -1,0 +1,15 @@
+.buttonNavbar{
+    background-color: hsl(11, 13%, 25%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.nav{
+    background-color: hsl(100, 13%, 25%);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}

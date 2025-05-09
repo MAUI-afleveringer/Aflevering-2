@@ -2,10 +2,10 @@ import { jwtDecode } from "jwt-decode"
 import { useEffect, useState } from "react";
 import React from "react";
 import { createPortal } from "react-dom";
-import AddModelToJobModal from "./Modals/AddModelToJobModal";
-import DeleteModelFromJobModal from "./Modals/DeleteModelFromJob";
+import AddModelToJobModal from "../Modals/AddModelToJobModal";
+import DeleteModelFromJobModal from "../Modals/DeleteModelFromJob";
 
-import JobModal from "./Modals/CreateJobModal";
+import JobModal from "../Modals/CreateJobModal";
 
 export default function Jobs() {
     const [data, setData] = useState([]);

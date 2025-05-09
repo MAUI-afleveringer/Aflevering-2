@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import ManagerModal from './Modals/CreateManagerModal';
-import UpdateManagerModal from './Modals/EditManagerModal';
+import ManagerModal from '../Modals/CreateManagerModal';
+import UpdateManagerModal from '../Modals/EditManagerModal';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom'
 import React from 'react';
