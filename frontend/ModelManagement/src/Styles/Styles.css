@@ -67,3 +67,14 @@ body {
     left: 0;
     top: 0;
 }
+
+/* Jobs.jsx */
+.job {
+    background-color: red;
+    margin-bottom: 5px;
+}
+
+.jobModel {
+    background-color: green;
+    margin-bottom: 5px;
+}

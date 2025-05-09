@@ -45,25 +45,12 @@ export default function Jobs() {
         setData(prevData => [prevData, deleteModelFromJob])
     }
 
-    function addModel(jobId, newModelData) {
+    function addModel(updatedJob) {
         setData(prevData =>
-            prevData.map(job => {
-                if (job.jobId === jobId) {
-                    const existingModels = Array.isArray(job.models) ? job.models : [];
-                    return {
-                        ...job,
-                        models: [...existingModels, newModelData]
-                    };
-                }
-                return job;
-            })
+            prevData.map(job =>
+                job.jobId === updatedJob.jobId ? updatedJob : job
+            )
         );
-        if (selectedJob && selectedJob.jobId === jobId) {
-            setSelectedJob(prevSelectedJob => ({
-                ...prevSelectedJob,
-                models: [...(Array.isArray(prevSelectedJob.models) ? prevSelectedJob.models : []), newModelData]
-            }));
-        }
     }
 
 
@@ -80,7 +67,7 @@ export default function Jobs() {
     //button added for job and createPortal added
     return (
         <main className="mainPage">
-            
+
             <button onClick={() => setShowCreateModal(true)}>Create new Job listing</button>
             <h1>Jobs</h1>
             {
@@ -99,7 +86,8 @@ export default function Jobs() {
                                     <section className="associatedModels">
                                         <button onClick={() => { setShowAddModal(true); setSelectedJob(job) }}>Add model to job</button>
                                         {job.models.map(model => (
-                                            <section key={model.modelId}>
+                                            <section className="jobModel" key={model.modelId}>
+                                                <p>{model.modelId}</p>
                                                 <p>{model.firstName} {model.lastName}</p>
                                                 <p>{model.email}</p>
                                             </section>

@@ -26,9 +26,9 @@ export default function AddModelToJobModal({
             });
 
             if (response.ok) {
-                const addedModel = await response.json();
+                const updatedJob = await response.json();
                 alert("Model added!");
-                AddModel(addedModel);
+                AddModel(updatedJob);
                 onClose();
             }
             else {
