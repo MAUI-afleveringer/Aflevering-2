@@ -14,7 +14,7 @@ import NavigationBar from './NavigationBar.jsx'
 function AppRoutes() {
   const location = useLocation();
   return (
-      <>
+    <>
       {location.pathname !== '/' && <NavigationBar />}
       <Routes>
         <Route path="/" element={<Login />} />
@@ -41,7 +41,7 @@ function AppRoutes() {
           </ProtectedRoute>
         } />
       </Routes>
-      </>
+    </>
   );
 }
 
