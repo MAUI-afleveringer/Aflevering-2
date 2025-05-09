@@ -76,6 +76,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     color: #30323D;
+    margin-right: 10px;
 }
 
 
@@ -200,3 +201,13 @@ h1 {
 /* Models.jsx */
 
 /* Model */
+
+.listStyle{
+    list-style: none;
+    padding-left: 20px;
+}
+
+.paddingBetweenButtons{
+    margin-right: 10px;
+    padding: 10px;
+}

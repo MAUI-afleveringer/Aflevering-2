@@ -53,9 +53,11 @@ export default function Managers() {
 
     return (
         <main className='mainPage'>
+            <li className='listStyle'>
             <h1 className='headers'>Managers</h1>
-            
+            <li className='listStyle'>
             <button className='buttonNavbar' onClick={() => setShowCreateModal(true)}>Create new manager</button>
+            </li></li>
 
             <section className="allJobs-box">
 
